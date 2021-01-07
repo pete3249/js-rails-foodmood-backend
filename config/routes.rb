@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # resources :recipe_ingredients
+  # resources :ingredients
   # resources :recipe_moods
   resources :recipes
   resources :moods
