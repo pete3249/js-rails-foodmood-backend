@@ -4,8 +4,7 @@ class MoodsController < ApplicationController
   # GET /moods
   def index
     @moods = Mood.all
-
-    render json: @moods
+    render json: MoodSerializer.new(@moods).serializable_hash[:data].map{|moodObject| moodObject[:attributes]}
   end
 
   # GET /moods/1
