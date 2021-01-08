@@ -223,3 +223,16 @@ cauli_curry.recipe_ingredients.find_or_create_by(ingredient_id: turmeric.id, amo
 cauli_curry.recipe_ingredients.find_or_create_by(ingredient_id: maple_syrup.id, amount:'1 Tbsp', notes:'(plus more to taste)')
 cauli_curry.recipe_ingredients.find_or_create_by(ingredient_id: cauliflower.id, amount:'1 cup', notes:'(chopped)')
 cauli_curry.recipe_ingredients.find_or_create_by(ingredient_id: chickpeas.id, amount:'1 1/4 cup', notes:'(cooked)')
+
+# faster way to add ingredients
+# ['@coconut_milk', '@swerve', '@peanut_butter', '@sea_salt'].each do |var_name|
+#     instance_variable_set(var_name, "hello")
+# end
+
+# names = ["Coconut Cream", "Swerve", "Peanut Butter", "Sea Salt"]
+
+# names.map do |name|
+#     var_name = "@#{name.split(' ').map(&:downcase).join("_")}"
+#     ing = Ingredient.find_or_create_by(name: name)
+#     instance_variable_set(var_name, ing)
+# end
