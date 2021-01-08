@@ -3,8 +3,12 @@ class RecipesController < ApplicationController
 
   # GET /recipes
   def index
-    @recipes = Recipe.all
-
+    if params["days"]
+      @recipes = Recipe.get_recipes(params["days"], params["moods"])
+    else 
+      @recipes = Recipe.all
+    end 
+    byebug
     render json: @recipes
   end
 
@@ -15,13 +19,14 @@ class RecipesController < ApplicationController
 
   # POST /recipes
   def create
-    @recipe = Recipe.new(recipe_params)
+      @recipe = Recipe.new(recipe_params)
 
-    if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
-    else
-      render json: @recipe.errors, status: :unprocessable_entity
-    end
+      if @recipe.save
+        render json: @recipe, status: :created, location: @recipe
+      else
+        render json: @recipe.errors, status: :unprocessable_entity
+      end
+    # end
   end
 
   # PATCH/PUT /recipes/1
