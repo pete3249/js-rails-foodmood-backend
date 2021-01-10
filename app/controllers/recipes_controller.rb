@@ -8,8 +8,8 @@ class RecipesController < ApplicationController
     else 
       @recipes = Recipe.all
     end 
-    byebug
-    render json: @recipes
+
+    render json: RecipeSerializer.new(@recipes).serializable_hash[:data].map{|recipeObject| recipeObject[:attributes]}
   end
 
   # GET /recipes/1
