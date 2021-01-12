@@ -9,7 +9,11 @@ class RecipesController < ApplicationController
       @recipes = Recipe.all
     end 
 
-    render json: RecipeSerializer.new(@recipes).serializable_hash[:data].map{|recipeObject| recipeObject[:attributes]}
+    if @recipes.length == 0
+      render plain: "Did not find any matching recipe(s)", status: :unprocessable_entity
+    else 
+      render json: RecipeSerializer.new(@recipes).serializable_hash[:data].map{|recipeObject| recipeObject[:attributes]}
+    end 
   end
 
   # GET /recipes/1
