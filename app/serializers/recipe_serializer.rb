@@ -12,7 +12,7 @@ class RecipeSerializer
   attribute :comments do |recipe|
     if recipe.comments.length > 0
       recipe.comments.map do |comment|
-        { name: "#{comment.name}", review: "#{comment.review}", recipe_id: "#{comment.recipe_id}", date: "#{comment.created_at.strftime("%B %Y")}"}
+        { id: "#{comment.id}", name: "#{comment.name}", review: "#{comment.review}", recipe_id: "#{comment.recipe_id}", date: "#{comment.created_at.strftime("%B %Y")}"}
       end 
     end 
   end 
