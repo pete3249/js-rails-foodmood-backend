@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      render json: CommentSerializer.new(@comment).serializable_hash[:data], status: :created, location: @comment
+      render json: CommentSerializer.new(@comment).serializable_hash[:data][:attributes], status: :created, location: @comment
     else
       render json: @comment.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
