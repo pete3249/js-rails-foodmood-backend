@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
-    render json: @comments
+    render json: CommentSerializer.new(@comments).serializable_hash[:data].map{|commentObjects| commentObjects[:attributes]}
   end
 
   # GET /comments/1
@@ -18,9 +18,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      render json: @comment, status: :created, location: @comment
+      render json: CommentSerializer.new(@comment).serializable_hash[:data], status: :created, location: @comment
     else
-      render json: @comment.errors, status: :unprocessable_entity
+      render json: @comment.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
 
