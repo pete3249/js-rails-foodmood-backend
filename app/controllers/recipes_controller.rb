@@ -5,8 +5,8 @@ class RecipesController < ApplicationController
   def index
     if params["days"]
       @recipes = Recipe.get_recipes(params["days"], params["moods"])
-    else 
-      @recipes = Recipe.all
+    elsif params["search"]
+      @recipes = Recipe.search_by_name(params["search"])
     end 
 
     if @recipes.length == 0
