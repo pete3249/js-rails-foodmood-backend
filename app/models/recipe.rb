@@ -15,4 +15,8 @@ class Recipe < ApplicationRecord
        selected_recipes = filtered_recipes.sample(days.to_i)
     end 
 
+    def self.search_by_name(search)
+          where("name LIKE ?", "%" + search + "%")
+    end 
+
 end
